@@ -1,0 +1,171 @@
+<div class="">
+  <div style="height:100vh;">
+
+   <div class="">
+    
+     <div class="shadow w-20 p-5 position-absolute top-50 start-50 translate-middle">
+       <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+         <h4 class="display-6 text-center py-2">Student Database</h4>
+        <div class="">
+          <label for="C_id">Roll No </label>
+          <div class="">
+            <input id="C_id" required #C_id="ngModel" (ngModel)="C_id" name="C_id" type="text"  
+            class="form-control" placeholder="enter your Roll number" pattern="(^\d{9}$)">
+            <div *ngIf="C_id.invalid && C_id.touched">
+              <small class="text-danger" *ngIf="C_id.errors?.['required']">Required
+
+              </small>
+              <small class="text-danger" *ngIf="C_id.errors?.['pattern']">Must be a valid number
+              </small>
+
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="C_name">Name </label>
+          <div class="">
+            <input id="C_name" required #C_name="ngModel" (ngModel)="C_name" name="C_name" type="text"  
+            class="form-control" placeholder="enter your name">
+            <div *ngIf="C_name.invalid && C_name.touched">
+              <small class="text-danger" *ngIf="C_name.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="C_dept">Department </label>
+          <div class="">
+            <input id="C_dept" required #C_dept="ngModel" (ngModel)="C_dept" name="C_dept" type="text"  
+            class="form-control" placeholder="enter your Department">
+            <div *ngIf="C_dept.invalid && C_dept.touched">
+              <small class="text-danger" *ngIf="C_dept.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="C_skills">Skills </label>
+          <div class="">
+            <input id="C_skills" required #desig="ngModel" (ngModel)="C_dept" name="C_dept" type="text"  
+            class="form-control" placeholder="enter your Skill">
+            <div *ngIf="C_dept.invalid && C_dept.touched">
+              <small class="text-danger" *ngIf="C_dept.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        
+            
+         
+  
+        <div class="form-group text-center">
+          <input class="btn btn-primary" type="submit" value="submit">
+        </div>
+      </form>
+     </div>
+   </div>
+</div><br>
+<div class="mt-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Roll number</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Skill</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of studentDetails">
+        <td>{{student.C_id}}</td>
+        <td>{{student.C_name}}</td>
+        <td>{{student.C_dept}}</td>
+        <td>{{student.C_skills}}</td>
+        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(student)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteStudent(student)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Customer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateStudent()">
+          <h4 class="display-6 text-center py-2">Student Database</h4>
+         <div class="">
+           <label for="C_id">Student ID </label>
+           <div class="">
+             <input id="C_id" required #C_id="ngModel" [(ngModel)]="studentToUpdate.C_id" name="C_id" type="text"  
+             class="form-control" placeholder="enter your Student number" pattern="(^\d{9}$)">
+             <div *ngIf="C_id.invalid && C_id.touched">
+               <small class="text-danger" *ngIf="C_id.errors?.['required']">Required
+ 
+               </small>
+               <small class="text-danger" *ngIf="C_id.errors?.['pattern']">Must be a valid number
+               </small>
+ 
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="C_name">Name </label>
+           <div class="">
+             <input id="C_name" required #C_name="ngModel" [(ngModel)]="studentToUpdate.C_name" name="C_name" type="text"  
+             class="form-control" placeholder="enter your name">
+             <div *ngIf="C_name.invalid && C_name.touched">
+               <small class="text-danger" *ngIf="C_name.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="C_dept">Department </label>
+           <div class="">
+             <input id="C_dept" required #C_dept="ngModel" [(ngModel)]="studentToUpdate.C_dept" name="C_dept" type="text"  
+             class="form-control" placeholder="enter your Department">
+             <div *ngIf="C_dept.invalid && C_dept.touched">
+               <small class="text-danger" *ngIf="C_dept.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="desig">Skill </label>
+           <div class="">
+             <input id="skills" required #skills="ngModel" [(ngModel)]="studentToUpdate.skills" name="skills" type="text"  
+             class="form-control" placeholder="enter your skill">
+             <div *ngIf="skills.invalid && skills.touched">
+               <small class="text-danger" *ngIf="skills.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+        
+     
+         <div class="form-group text-center">
+           <input class="btn btn-primary" type="submit" value="update">
+         </div>
+       </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
